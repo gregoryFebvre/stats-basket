@@ -47,7 +47,7 @@ export function MatchsPage() {
                       <td>{b.score}{b.scoreAdverse !== null && ` – ${b.scoreAdverse}`}</td>
                       <td>{b.resultat ? LIBELLES[b.resultat] : <span className="badge">à compléter</span>}{b.resultat && b.lfObtenus === null && <span className="badge">LF ?</span>}</td>
                       <td className="actions-ligne">
-                        <Link to={`/matchs/${m.id}`}>Fiche</Link>
+                        <Link to={`/matchs/${m.id}`}>Fiche</Link>&nbsp;
                         <Link to={`/matchs/${m.id}/modifier`}>Modifier</Link>
                         <button type="button" className="lien" onClick={() => supprimer(m.id, `${m.date} ${m.adversaire}`)}>Supprimer</button>
                       </td>

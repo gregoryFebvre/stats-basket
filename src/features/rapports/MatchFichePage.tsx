@@ -26,7 +26,7 @@ export function MatchFichePage() {
           <>
             <div className="entete-page">
               <h1>Match du {fmtDate(match.date)} contre {match.adversaire}</h1>
-              <div className="actions no-print"><Link className="bouton secondaire" to={`/matchs/${match.id}/modifier`}>Modifier</Link><ImprimerBouton /></div>
+              <div className="actions no-print"><span className="actions no-print"><Link className="bouton secondaire" to={`/matchs/${match.id}/modifier`}>Modifier</Link></span><ImprimerBouton /></div>
             </div>
             <p>{match.type}{match.lieu && ` — ${match.lieu}`}</p>
             <div className="kpis">

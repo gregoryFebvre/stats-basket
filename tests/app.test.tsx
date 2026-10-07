@@ -32,6 +32,33 @@ describe("application", () => {
   });
 });
 
+describe("menu responsive", () => {
+  it("se replie derrière un bouton, s'ouvre, puis se referme après un clic sur un lien ou Échap", async () => {
+    const repo = new LocalStorageRepository(new MemoryStore(), "t");
+    const user = userEvent.setup();
+    render(<RepoProvider repo={repo}><App /></RepoProvider>);
+
+    const bouton = await screen.findByRole("button", { name: "Menu" });
+    const nav = screen.getByRole("navigation", { name: "Navigation principale" });
+    expect(bouton.getAttribute("aria-expanded")).toBe("false");
+    expect(nav.classList.contains("ouvert")).toBe(false);
+
+    await user.click(bouton);
+    expect(bouton.getAttribute("aria-expanded")).toBe("true");
+    expect(nav.classList.contains("ouvert")).toBe(true);
+    expect(nav.querySelectorAll("a")).toHaveLength(7);
+
+    await user.click(screen.getByRole("link", { name: "Données" }));
+    expect(await screen.findByRole("heading", { name: "Données" })).toBeTruthy();
+    expect(bouton.getAttribute("aria-expanded")).toBe("false");
+
+    await user.click(bouton);
+    expect(nav.classList.contains("ouvert")).toBe(true);
+    await user.keyboard("{Escape}");
+    expect(nav.classList.contains("ouvert")).toBe(false);
+  });
+});
+
 describe("export HTML autonome", () => {
   it("garde le contenu et les graphiques, retire boutons, filtres et liens", () => {
     const racine = document.createElement("main");

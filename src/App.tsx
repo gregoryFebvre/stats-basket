@@ -1,6 +1,6 @@
 import { Suspense, lazy } from "react";
-import { HashRouter, NavLink, Navigate, Route, Routes } from "react-router-dom";
-import { CLUB } from "./club.config";
+import { HashRouter, Navigate, Route, Routes } from "react-router-dom";
+import { Entete } from "./app/Entete";
 import { DonneesPage } from "./features/donnees/DonneesPage";
 import { MatchsPage } from "./features/matchs/MatchsPage";
 import { SaisiePage } from "./features/saisie/SaisiePage";
@@ -18,18 +18,7 @@ const JoueuseFichePage = page(() => import("./features/rapports/JoueusesPage"), 
 export function App() {
   return (
     <HashRouter>
-      <header className="entete">
-        <strong>🏀 {CLUB.nom} {CLUB.equipe}</strong>
-        <nav>
-          <NavLink to="/saison">Saison</NavLink>
-          <NavLink to="/matchs" end>Matchs</NavLink>
-          <NavLink to="/joueuses">Joueuses</NavLink>
-          <NavLink to="/lancers-francs">Lancers francs</NavLink>
-          <NavLink to="/comparer">Comparer</NavLink>
-          <NavLink to="/matchs/nouveau">Saisie</NavLink>
-          <NavLink to="/donnees">Données</NavLink>
-        </nav>
-      </header>
+      <Entete />
       <main>
         <Suspense fallback={<p>Chargement…</p>}>
         <Routes>
